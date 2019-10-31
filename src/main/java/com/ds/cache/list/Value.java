@@ -1,4 +1,4 @@
-package com.ds.cache;
+package com.ds.cache.list;
 
 public class Value {
 	int key;
@@ -9,8 +9,6 @@ public class Value {
 	public Value(int key, int val) {
 		this.key = key;
 		this.val = val;
-		this.prev = null;
-		this.next = null;
 	}
 	
 	public int getVal() {

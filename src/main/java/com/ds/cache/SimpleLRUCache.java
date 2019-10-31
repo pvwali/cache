@@ -1,76 +1,42 @@
 package com.ds.cache;
 
+import com.ds.cache.list.DoublyLinkedList;
+import com.ds.cache.list.Value;
+
 public class SimpleLRUCache extends SimpleCache {
-	Value head, tail;
-	
+	DoublyLinkedList list;
 	public SimpleLRUCache(int cap) {
 		super(cap);
-		head = null;
-		tail = null;
+		list = new DoublyLinkedList();
 	}
 
+	/**
+	 * For LRU cache adds to end of list
+	 */
 	@Override
-	public synchronized void addToEnd(Value val) {
+	public synchronized void addToList(Value val) {
 		if (map.size() == capacity) {
-			Value oldVal = poll();
-			System.out.println("Maxx: "+oldVal.key);			
+			Value oldVal = list.poll();
+			System.out.println("Maxx: "+oldVal.getKey());			
 			map.remove(oldVal.getKey());
 		}
-		pour(val);
-		printList();		
+		list.pour(val);
 	}
 
+	/**
+	 * For LRU cache move from current post to end of list
+	 */
 	@Override
-	public synchronized void alter(Value val) {
-		System.out.println("Revisiting: "+val.key);
-		moveToEnd(val);
-		printList();		
+	public synchronized void alterPositionInList(Value val) {
+		System.out.println("Revisiting: "+val.getKey());
+		list.moveToEnd(val);
 	}
 	
-	private void moveToEnd(Value val) {
-		if (val == tail) {
-			return;
-		}
-		
-		if (val == head) {
-			head = head.next;
-		} else {
-			val.prev.next = val.next;
-			val.next.prev = val.prev;
-		}
-		val.prev = tail;			
-		tail.next = val;
-		tail = val;
-		val.next = null;
-	}
-	
-	private Value poll() {
-		if (head == null) {
-			return null;
-		}
-		Value oldVal = head;
-		head = head.next;
-		head.prev = null;
-		return oldVal;
-	}
-
-	private void pour(Value val) {
-		if (tail == null) {
-			tail = val;
-			head = val;
-			return;
-		}
-		tail.next = val;
-		val.prev = tail;
-		tail = val;
-	}	
-	
-	private void printList() {
-		Value tmp = head;
-		while (tmp != null) {
-			System.out.print(tmp+":");
-			tmp = tmp.next;
-		}
-		System.out.println("");
+	/**
+	 * Prints the current cache keys
+	 */
+	@Override
+	public void printCacheKeys() {
+		list.printList();
 	}
 }

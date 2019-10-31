@@ -1,4 +1,4 @@
-package cache;
+package com.ds.cache.client;
 
 import org.junit.Test;
 
@@ -10,6 +10,5 @@ public class CacheClientTest {
 	public void test() {
 		CacheClient cc = new CacheClient();
 		cc.init();
-		System.out.println();
 	}
 }

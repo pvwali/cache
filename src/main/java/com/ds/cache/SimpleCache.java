@@ -2,7 +2,10 @@ package com.ds.cache;
 
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+
+import com.ds.cache.list.Value;
 
 public abstract class SimpleCache implements Cache<Integer, Integer> {
 	Map<Integer, Value> map;
@@ -15,20 +18,25 @@ public abstract class SimpleCache implements Cache<Integer, Integer> {
 		this.map = new ConcurrentHashMap<>(cap);
 	}
 	
+	/**
+	 * Servers the client with a simple get
+	 */
 	@Override
 	public synchronized Integer get(Integer key) {
 		if (!map.containsKey(key)) {
 				Value val = getValFromSrc(key);
-				addToEnd(val);
+				addToList(val);
 				map.put(key, val);	
 		} else {
-			alter(map.get(key));
+			alterPositionInList(map.get(key));
 		}
+		printCacheKeys();
 		return map.get(key).getVal();
 	}
 
-	public abstract void addToEnd(Value val);
-	public abstract void alter(Value val);
+	public abstract void addToList(Value val);
+	public abstract void alterPositionInList(Value val);
+	public abstract void printCacheKeys();
 	
 	/**
 	 * Get value from source mocked. In reality this could fetch from any source
@@ -37,5 +45,13 @@ public abstract class SimpleCache implements Cache<Integer, Integer> {
 	 */
 	private Value getValFromSrc(Integer key) {
 		return new Value(key, r.nextInt(1000));
+	}
+	
+	/**
+	 * Get the current cache keys
+	 */
+	@Override
+	public Set<Integer> keys() {
+		return map.keySet();
 	}
 }
