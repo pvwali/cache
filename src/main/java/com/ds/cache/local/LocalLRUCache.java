@@ -3,9 +3,9 @@ package com.ds.cache.local;
 import com.ds.cache.list.DoublyLinkedList;
 import com.ds.cache.list.Value;
 
-public class LocaLRUCache extends LocalCache {
+public class LocalLRUCache extends LocalCache {
 	DoublyLinkedList list;
-	public LocaLRUCache(int cap) {
+	public LocalLRUCache(int cap) {
 		super(cap);
 		list = new DoublyLinkedList();
 	}
@@ -36,7 +36,9 @@ public class LocaLRUCache extends LocalCache {
 	 * Prints the current cache keys
 	 */
 	@Override
-	public void printCacheKeys() {
+	public synchronized void printCacheKeys() {		
+		System.out.print(this+"->");
 		list.printList();
+		System.out.println();
 	}
 }

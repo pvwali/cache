@@ -1,8 +1,7 @@
 package com.ds.cache.distributed;
 
-import java.util.Set;
+import com.ds.cache.ICache;
 
-public class IDistributedCache {
-	public V get(K k);
-	public Set<K> keys();
+
+public interface IDistributedCache<K, V> extends ICache<K, V> {
 }

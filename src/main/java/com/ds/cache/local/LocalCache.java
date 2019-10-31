@@ -11,10 +11,12 @@ import com.ds.cache.list.Value;
 public abstract class LocalCache implements ICache<Integer, Integer> {
 	Map<Integer, Value> map;
 	
+	String name;
 	int capacity;
 	Random r = new Random();
 	
 	public LocalCache(int cap) {
+		this.name = "LC_"+r.nextInt(5000);
 		this.capacity = cap;
 		this.map = new ConcurrentHashMap<>(cap);
 	}
@@ -54,5 +56,10 @@ public abstract class LocalCache implements ICache<Integer, Integer> {
 	@Override
 	public Set<Integer> keys() {
 		return map.keySet();
+	}
+	
+	@Override
+	public String toString() {
+		return name;
 	}
 }
