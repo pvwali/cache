@@ -5,7 +5,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import com.ds.cache.Cache;
-import com.ds.cache.SimpleLRUCache;
+import com.ds.cache.SimpleLFUCache;
 
 
 public class CacheClient {
@@ -15,10 +15,10 @@ public class CacheClient {
 	
 	public CacheClient() {
 		executor = Executors.newFixedThreadPool(5);
-		myCache = new SimpleLRUCache(10);
+		myCache = new SimpleLFUCache(10);
 	}
 	
-	public void init() {
+	public void init() throws InterruptedException {
 		for (int i=0; i<5; i++) {
 			executor.submit(() -> {
 				try {
@@ -30,6 +30,12 @@ public class CacheClient {
 				}
 			});
 		}
-		while (executor.isTerminated()) {}
+		
+		// Running the simulation for 20sec
+		Thread.sleep(1000*10);
+		executor.shutdownNow();		
+		while (!executor.isTerminated()) {
+			Thread.sleep(1000);
+		}
 	}
 }

@@ -7,7 +7,7 @@ import com.ds.cache.client.CacheClient;
 public class CacheClientTest {
 
 	@Test
-	public void test() {
+	public void test() throws InterruptedException {
 		CacheClient cc = new CacheClient();
 		cc.init();
 	}

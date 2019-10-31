@@ -3,12 +3,14 @@ package com.ds.cache.list;
 public class Value {
 	int key;
 	int val;
+	int freq;
 	Value prev;
 	Value next;
 	
 	public Value(int key, int val) {
 		this.key = key;
 		this.val = val;
+		this.freq = 0;
 	}
 	
 	public int getVal() {
@@ -17,6 +19,14 @@ public class Value {
 	
 	public int getKey() {
 		return key;
+	}
+	
+	public int getFreq() {
+		return freq;
+	}
+	
+	public void incrFreq() {
+		this.freq++;
 	}
 	
 	@Override
