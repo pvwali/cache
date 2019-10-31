@@ -4,18 +4,18 @@ import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import com.ds.cache.Cache;
-import com.ds.cache.SimpleLFUCache;
+import com.ds.cache.ICache;
+import com.ds.cache.local.LocalLFUCache;
 
 
-public class CacheClient {
+public class LocalCacheClient {
 	ExecutorService executor;
-	Cache<Integer, Integer> myCache;
+	ICache<Integer, Integer> myCache;
 	Random r = new Random();
 	
-	public CacheClient() {
+	public LocalCacheClient() {
 		executor = Executors.newFixedThreadPool(5);
-		myCache = new SimpleLFUCache(10);
+		myCache = new LocalLFUCache(10);
 	}
 	
 	public void init() throws InterruptedException {

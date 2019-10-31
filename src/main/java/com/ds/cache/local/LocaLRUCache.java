@@ -1,14 +1,13 @@
-package com.ds.cache;
+package com.ds.cache.local;
 
-import java.util.PriorityQueue;
-
+import com.ds.cache.list.DoublyLinkedList;
 import com.ds.cache.list.Value;
 
-public class SimpleLFUCache extends SimpleCache {
-	PriorityQueue<Value> list;
-	public SimpleLFUCache(int cap) {
+public class LocaLRUCache extends LocalCache {
+	DoublyLinkedList list;
+	public LocaLRUCache(int cap) {
 		super(cap);
-		list = new PriorityQueue<Value>((a,b)->a.getFreq()-b.getFreq());
+		list = new DoublyLinkedList();
 	}
 
 	/**
@@ -18,10 +17,10 @@ public class SimpleLFUCache extends SimpleCache {
 	public synchronized void addToList(Value val) {
 		if (map.size() == capacity) {
 			Value oldVal = list.poll();
-			System.out.println("Maxx cap - evict "+oldVal.getKey());			
+			System.out.println("Maxx cap - evict"+oldVal.getKey());			
 			map.remove(oldVal.getKey());
 		}
-		list.offer(val);
+		list.pour(val);
 	}
 
 	/**
@@ -30,9 +29,7 @@ public class SimpleLFUCache extends SimpleCache {
 	@Override
 	public synchronized void alterPositionInList(Value val) {
 		System.out.println("Revisiting: "+val.getKey());
-		list.remove(val);
-		val.incrFreq();
-		list.offer(val);
+		list.moveToEnd(val);
 	}
 	
 	/**
@@ -40,7 +37,6 @@ public class SimpleLFUCache extends SimpleCache {
 	 */
 	@Override
 	public void printCacheKeys() {
-		Value v = list.peek();
-		System.out.println(v.getKey()+":"+v.getFreq());		
+		list.printList();
 	}
 }

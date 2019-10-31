@@ -1,19 +1,20 @@
-package com.ds.cache;
+package com.ds.cache.local;
 
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.ds.cache.ICache;
 import com.ds.cache.list.Value;
 
-public abstract class SimpleCache implements Cache<Integer, Integer> {
+public abstract class LocalCache implements ICache<Integer, Integer> {
 	Map<Integer, Value> map;
 	
 	int capacity;
 	Random r = new Random();
 	
-	public SimpleCache(int cap) {
+	public LocalCache(int cap) {
 		this.capacity = cap;
 		this.map = new ConcurrentHashMap<>(cap);
 	}
