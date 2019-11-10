@@ -8,19 +8,18 @@ import com.cache.ICache;
 import com.csh.cache.RingCache;
 
 public class RingCacheClient {
-	ExecutorService exSvc;
+	ExecutorService executor;
 	ICache<Integer, Integer> myCache;
 
 	public RingCacheClient() {
+		executor = Executors.newFixedThreadPool(5);
 		myCache = new RingCache();
-		exSvc = Executors.newFixedThreadPool(5);
-		init();
 	}
 	
-	public void init() {
+	public void init() throws InterruptedException {
 		Random r = new Random();
 		for (int i=0; i<5; i++) {
-			exSvc.submit(
+			executor.submit(
 				() -> {
 					try {
 						do {
@@ -32,5 +31,12 @@ public class RingCacheClient {
 				}
 			);
 		}
+		
+		// Running the simulation for 20sec
+		Thread.sleep(1000*20);
+		executor.shutdownNow();		
+		while (!executor.isTerminated()) {
+			Thread.sleep(1000);
+		}		
 	}
 }

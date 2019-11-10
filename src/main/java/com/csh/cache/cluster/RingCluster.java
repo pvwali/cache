@@ -60,7 +60,12 @@ public class RingCluster implements ICluster<Node> {
 	@Override
 	public Node getNode(int key) {
 		Integer nodeKey = hFun.hashKey(key);
-		return nodes.get(nodes.ceilingKey(nodeKey));
+		
+		Integer nearNodeKey = nodes.ceilingKey(nodeKey);
+		if (nearNodeKey==null){
+			nearNodeKey = 0;
+		}
+		return nodes.get(nearNodeKey);
 	}
 	
 	/**
