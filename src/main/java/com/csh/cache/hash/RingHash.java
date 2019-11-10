@@ -2,9 +2,9 @@ package com.csh.cache.hash;
 
 public class RingHash implements IHash<Integer, Integer> {
 	int hi, lo;
-	public RingHash(int hi, int lo) {
+	public RingHash(int lo, int hi) {
 		this.hi = hi;
-		this.lo -= lo;
+		this.lo = lo;
 	}
 	
 	/**
@@ -13,7 +13,7 @@ public class RingHash implements IHash<Integer, Integer> {
 	 */
 	@Override
 	public Integer hashKey(Integer v) {
-		return hashKeyWithIn(v, this.hi, this.lo);
+		return hashKeyWithIn(v, this.lo, this.hi);
 	}
 
 	
@@ -22,7 +22,7 @@ public class RingHash implements IHash<Integer, Integer> {
 	 *  b/w the custom hi & lo
 	 */
 	@Override
-	public Integer hashKeyWithIn(Integer v, int hi, int lo) {
+	public Integer hashKeyWithIn(Integer v, int lo, int hi) {
 		return (v % (hi-lo)) + lo;
 	}
 }
