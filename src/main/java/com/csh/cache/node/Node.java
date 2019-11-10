@@ -21,7 +21,8 @@ public class Node implements ICache<Integer, Integer>{
 	}
 	
 	/**
-	 * Returns the cache value for the given key
+	 * Returns the value for the given key,
+	 *  from the localCache
 	 */
 	@Override
 	public Integer get(Integer k) {
