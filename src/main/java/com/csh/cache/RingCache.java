@@ -17,7 +17,10 @@ public class RingCache implements ICache<Integer, Integer> {
 	
 	@Override
 	public Integer get(Integer k) {
-		return rc.getNode(k).get(k);
+		Node keyNode = rc.getNode(k);
+		Integer val = keyNode.get(k);
+		System.out.println(keyNode);
+		return val;
 	}
 
 	@Override

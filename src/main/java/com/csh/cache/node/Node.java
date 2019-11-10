@@ -51,4 +51,9 @@ public class Node implements ICache<Integer, Integer>{
 	public Integer getId() {
 		return this.id;
 	}
+	
+	@Override
+	public String toString() {
+		return id+":"+clusterKey+"["+keys()+"]";
+	}
 }
