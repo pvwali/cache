@@ -63,7 +63,7 @@ public class RingCluster implements ICluster<Node> {
 		
 		Integer nearNodeKey = nodes.ceilingKey(nodeKey);
 		if (nearNodeKey==null){
-			nearNodeKey = 0;
+			nearNodeKey = nodes.ceilingKey(0);
 		}
 		return nodes.get(nearNodeKey);
 	}
