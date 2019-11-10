@@ -23,7 +23,7 @@ public class RingCacheClient {
 				() -> {
 					try {
 						do {
-							myCache.get(r.nextInt(20));
+							myCache.get(r.nextInt(50_000));
 							Thread.sleep(100);
 						} while(true);
 					} catch (Exception e) {
