@@ -21,10 +21,10 @@ public class RingCluster implements ICluster<Node> {
 
 		Random r = new Random();
 		for (int i=0; i<n; i++) {
-			addNode(new Node(r.nextInt(), 10));
+			addNode(new Node(Math.abs(r.nextInt()), 10));
 		}
 	}
-	public static RingCluster getClusterInstanceOf(int n) {
+	public static RingCluster createCluster(int n) {
 		if (rc == null) {
 			rc = new RingCluster(n);
 		}
@@ -63,6 +63,9 @@ public class RingCluster implements ICluster<Node> {
 		return nodes.get(nodes.ceilingKey(nodeKey));
 	}
 	
+	/**
+	 * Gets all nodes of a cluster
+	 */
 	@Override
 	public Set<Node> getAllNodes() {
 		return new HashSet<>(nodes.values());
