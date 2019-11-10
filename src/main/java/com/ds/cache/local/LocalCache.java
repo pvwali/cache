@@ -5,7 +5,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.ds.cache.ICache;
+import com.cache.ICache;
 import com.ds.cache.list.Value;
 
 public abstract class LocalCache implements ICache<Integer, Integer> {

@@ -2,6 +2,9 @@ package com.ds.cache.client;
 
 import org.junit.Test;
 
+import com.cache.client.DistributedCacheClient;
+import com.cache.client.LocalCacheClient;
+
 public class CacheClientTest {
 
 	@Test

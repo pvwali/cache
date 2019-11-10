@@ -2,7 +2,7 @@ package com.ds.cache.distributed;
 
 import java.util.Set;
 
-import com.ds.cache.ICache;
+import com.cache.ICache;
 
 public class DistributedCache implements IDistributedCache<Integer, Integer> {
 	

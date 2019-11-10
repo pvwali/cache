@@ -3,7 +3,7 @@ package com.ds.cache.distributed;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ds.cache.ICache;
+import com.cache.ICache;
 import com.ds.cache.local.LocalLRUCache;
 
 public class DistributedCacheManager {
